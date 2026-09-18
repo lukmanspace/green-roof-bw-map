@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BW Green Roof Predictions</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.css"
+  >
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<div class="panel">
+
+  <h2 id="app-title">
+    Green Roof Predictions
+  </h2>
+
+  <div id="dataset-name" class="subtitle">
+    Stuttgart
+  </div>
+  
+  <div class="toolbar">
+  <button id="resetView" type="button">
+    Reset view
+  </button>
+
+  <span id="status" class="status">
+    Loading…
+  </span>
+</div>
+  <div class="control">
+  <label for="citySelect">
+    City / district
+  </label>
+
+  <select id="citySelect"></select>
+</div>
+  <div class="control">
+    <label for="classification">
+      Classification threshold
+    </label>
+
+    <select id="classification">
+      <option value="pred_f1">
+        F1-optimized threshold
+      </option>
+
+      <option value="pred_ge_085">
+        Probability ≥ 0.85
+      </option>
+
+      <option value="pred_ge_090">
+        Probability ≥ 0.90
+      </option>
+
+      <option value="pred_top1pct">
+        Top 1%
+      </option>
+
+      <option value="pred_top2pct">
+        Top 2%
+      </option>
+
+      <option value="pred_top5pct">
+        Top 5%
+      </option>
+    </select>
+  </div>
+
+
+  <div class="control">
+
+    <label>
+      Display
+    </label>
+
+    <div class="radio-row">
+
+      <label>
+        <input
+          type="radio"
+          name="display"
+          value="all"
+          checked
+        >
+        All
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="display"
+          value="green"
+        >
+        Green
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="display"
+          value="nongreen"
+        >
+        Non-green
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div class="control">
+
+    <label>
+      Visualization
+    </label>
+
+    <div class="radio-row">
+
+      <label>
+        <input
+          type="radio"
+          name="visualization"
+          value="classification"
+          checked
+        >
+        Class
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="visualization"
+          value="probability"
+        >
+        Probability
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div id="classLegend" class="legend">
+
+    <div class="legend-title" id="legend-title">
+      F1-optimized classification
+    </div>
+
+    <div class="legend-row">
+      <span class="swatch green-swatch"></span>
+      Predicted green roof
+    </div>
+
+    <div class="legend-row">
+      <span class="swatch nongreen-swatch"></span>
+      Predicted non-green
+    </div>
+
+  </div>
+
+
+  <div
+    id="probabilityLegend"
+    class="legend hidden"
+  >
+
+    <div class="legend-title">
+      Green-roof probability
+    </div>
+
+    <div class="gradient"></div>
+
+    <div class="gradient-labels">
+      <span>0</span>
+      <span>0.5</span>
+      <span>1.0</span>
+    </div>
+
+  </div>
+
+  <div class="info-box">
+    F1 is the default classification because it provides the best balance
+    between precision and recall in the model evaluation.
+  </div>
+
+  <div class="author-box">
+
+  <div class="author-name">
+    Lukman Hakim
+  </div>
+
+  <a href="mailto:hakim.lukman1k@gmail.com">
+    hakim.lukman1k@gmail.com
+  </a>
+
+  <a
+    href="https://github.com/lukmanspace/green-roof-detection-bw"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    GitHub repository
+  </a>
+
+  <a
+    href="https://lukmanspace.github.io/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    lukmanspace.github.io
+  </a>
+
+</div>
+
+</div>
+
+
+<script
+  src="https://unpkg.com/pmtiles@4.3.0/dist/pmtiles.js">
+</script>
+
+<script type="module" src="./main.js"></script>
+
+</body>
+</html>
